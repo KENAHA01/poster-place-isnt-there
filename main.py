@@ -14,7 +14,11 @@ def main():
         print("entry.png not found next to main.py", file=sys.stderr)
         return 1
     os.makedirs(out_dir, exist_ok=True)
-    shutil.copyfile(source, os.path.join(out_dir, "entry.png"))
+    dest = os.path.join(out_dir, "entry.png")
+    shutil.copyfile(source, dest)
+    if os.path.getsize(dest) == 0:
+        print("entry.png copied but empty", file=sys.stderr)
+        return 1
     return 0
 
 
